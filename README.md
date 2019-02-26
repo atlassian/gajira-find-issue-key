@@ -2,9 +2,13 @@
 Extract issue key from string
 
 ## Usage
-
-TBD
-
+```
+action "Find in commit messages" {
+  uses = "atlassian/gajira-find-issue-key@master"
+  needs = ["Login"]
+  args = "--from=commits"
+}
+```
 ----
 ## Action Spec:
 
@@ -12,8 +16,8 @@ TBD
 - None
 
 ### Arguments
-- None
-
+- `--from=commits` - Detect issue key in commit messages from event
+- `--from=branch` - Detect issue key in branch name
 ### Reads fields from config file at $HOME/jira/config.yml
 - None
 
