@@ -1,9 +1,13 @@
 # Jira Find Issue Key
 Extract issue key from string
 
-Requires [Jira Login Action](https://github.com/marketplace/actions/jira-login)
+For examples on how to use this, check out the [gajira-demo](https://github.com/atlassian/gajira-demo) repository
 
 ## Usage
+
+> ##### Note: this action requires [Jira Login Action](https://github.com/marketplace/actions/jira-login)
+
+To find an issue key inside commit messages:
 ```
 action "Find in commit messages" {
   uses = "atlassian/gajira-find-issue-key@master"
