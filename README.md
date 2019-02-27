@@ -1,6 +1,8 @@
 # Jira Find Issue Key
 Extract issue key from string
 
+Requires [Jira Login Action](https://github.com/marketplace/actions/jira-login)
+
 ## Usage
 ```
 action "Find in commit messages" {
