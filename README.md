@@ -9,6 +9,30 @@ action "Find in commit messages" {
   args = "--from=commits"
 }
 ```
+
+
+Also you can use [lodash templates](https://lodash.com/docs/4.17.11#template) to retrieve fields from GitHub Event which triggered workflow, like: `{{event.ref}}` Here is an example:
+
+```
+action "Find in branch name" {
+  uses = "atlassian/gajira-find-issue-key@master"
+  needs = ["Login"]
+  args = "{{event.ref}}"
+}
+```
+which is the same as `--from=branch`
+
+Or more complex one:
+
+```
+action "Find in commit messages" {
+  uses = "atlassian/gajira-find-issue-key@master"
+  needs = ["Login"]
+  args = "{{event.commits.map(c=>c.message).join(' ')}}"
+}
+```
+which is the same as `--from=commits`
+
 ----
 ## Action Spec:
 
