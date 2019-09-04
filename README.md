@@ -9,14 +9,7 @@ For examples on how to use this, check out the [gajira-demo](https://github.com/
 > ##### Note: this action requires [Jira Login Action](https://github.com/marketplace/actions/jira-login)
 
 To find an issue key inside commit messages:
-```
-- name: Login
-  uses: atlassian/gajira-login@master
-  env:
-    JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
-    JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
-    JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
-
+```yaml
 - name: Find in commit messages
   uses: atlassian/gajira-find-issue-key@master
   with:
