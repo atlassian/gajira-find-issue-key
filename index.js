@@ -24,7 +24,7 @@ async function exec () {
       console.log(`Saving ${result.issue} to ${configPath}`)
 
       // Expose created issue's key as an output
-      core.setOutput("issue", result.issue)
+      core.setOutput('issue', result.issue)
 
       const yamledResult = YAML.stringify(result)
       const extendedConfig = Object.assign({}, config, result)
@@ -45,7 +45,7 @@ function parseArgs () {
   return {
     event: core.getInput('event') || config.event,
     string: core.getInput('string') || config.string,
-    from: core.getInput('from')
+    from: core.getInput('from'),
   }
 }
 
