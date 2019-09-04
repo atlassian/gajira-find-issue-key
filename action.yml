@@ -16,4 +16,4 @@ outputs:
     description: Key of the found issue
 runs:
   using: 'node12'
-  main: './index.js'
+  main: './dist/index.js'
