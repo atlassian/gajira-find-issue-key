@@ -8,7 +8,7 @@ inputs:
     description: Provide a string to extract issue key from
     required: false
   from:
-    description: Find from predefined place (should be either 'branch', or 'commits', default is 'commit')
+    description: Find from predefined place (should be either 'branch', or 'commits', default is 'commits')
     required: false
     default: commits
 outputs:

@@ -10,35 +10,18 @@ For examples on how to use this, check out the [gajira-demo](https://github.com/
 
 To find an issue key inside commit messages:
 ```
-action "Find in commit messages" {
-  uses = "atlassian/gajira-find-issue-key@master"
-  needs = ["Login"]
-  args = "--from=commits"
-}
-```
+- name: Login
+  uses: atlassian/gajira-login@master
+  env:
+    JIRA_BASE_URL: ${{ secrets.JIRA_BASE_URL }}
+    JIRA_USER_EMAIL: ${{ secrets.JIRA_USER_EMAIL }}
+    JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
 
-
-Also you can use [lodash templates](https://lodash.com/docs/4.17.11#template) to retrieve fields from GitHub Event which triggered workflow, like: `{{event.ref}}` Here is an example:
-
+- name: Find in commit messages
+  uses: atlassian/gajira-find-issue-key@master
+  with:
+    from: commits
 ```
-action "Find in branch name" {
-  uses = "atlassian/gajira-find-issue-key@master"
-  needs = ["Login"]
-  args = "{{event.ref}}"
-}
-```
-which is the same as `--from=branch`
-
-Or more complex one:
-
-```
-action "Find in commit messages" {
-  uses = "atlassian/gajira-find-issue-key@master"
-  needs = ["Login"]
-  args = "{{event.commits.map(c=>c.message).join(' ')}}"
-}
-```
-which is the same as `--from=commits`
 
 ----
 ## Action Spec:
@@ -46,9 +29,14 @@ which is the same as `--from=commits`
 ### Environment variables
 - None
 
-### Arguments
-- `--from=commits` - Detect issue key in commit messages from event
-- `--from=branch` - Detect issue key in branch name
+### Inputs
+- `description` - Provide jsonpath for the GitHub event to extract issue from
+- `string` - Provide a string to extract issue key from
+- `from` - Find from predefined place (should be either 'branch', or 'commits', default is 'commits')
+
+### Outputs
+- `issue` - Key of the found issue
+
 ### Reads fields from config file at $HOME/jira/config.yml
 - None
 
