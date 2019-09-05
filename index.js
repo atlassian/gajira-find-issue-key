@@ -1,6 +1,6 @@
 const fs = require('fs')
 const YAML = require('yaml')
-const yargs = require('yargs')
+const core = require('@actions/core')
 
 const cliConfigPath = `${process.env.HOME}/.jira.d/config.yml`
 const configPath = `${process.env.HOME}/jira/config.yml`
@@ -23,6 +23,9 @@ async function exec () {
       console.log(`Saving ${result.issue} to ${cliConfigPath}`)
       console.log(`Saving ${result.issue} to ${configPath}`)
 
+      // Expose created issue's key as an output
+      core.setOutput('issue', result.issue)
+
       const yamledResult = YAML.stringify(result)
       const extendedConfig = Object.assign({}, config, result)
 
@@ -32,39 +35,18 @@ async function exec () {
     }
 
     console.log('No issueKeys found.')
-    process.exit(78)
+    core.setNeutral()
   } catch (error) {
-    console.error(error)
-    process.exit(1)
+    core.setFailed(error.toString())
   }
 }
 
 function parseArgs () {
-  yargs
-    .option('event', {
-      alias: 'e',
-      describe: 'Provide jsonpath for the GitHub event to extract issue from',
-      default: config.event,
-      type: 'string',
-    })
-    .option('string', {
-      alias: 's',
-      describe: 'Provide a string to extract issue key from',
-      default: config.string,
-      type: 'string',
-    })
-    .option('from', {
-      describe: 'Find from predefined place',
-      type: 'string',
-      choices: ['branch', 'commits'],
-    })
-
-  yargs
-    .parserConfiguration({
-      'parse-numbers': false,
-    })
-
-  return yargs.argv
+  return {
+    event: core.getInput('event') || config.event,
+    string: core.getInput('string') || config.string,
+    from: core.getInput('from'),
+  }
 }
 
 exec()

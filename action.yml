@@ -1,0 +1,19 @@
+name: Jira Find Issue Key
+description: Find an issue inside event
+inputs:
+  event:
+    description: Provide jsonpath for the GitHub event to extract issue from
+    required: false
+  string:
+    description: Provide a string to extract issue key from
+    required: false
+  from:
+    description: Find from predefined place (should be either 'branch', or 'commits', default is 'commits')
+    required: false
+    default: commits
+outputs:
+  issue:
+    description: Key of the found issue
+runs:
+  using: 'node12'
+  main: './dist/index.js'
