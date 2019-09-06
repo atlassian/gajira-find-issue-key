@@ -22,7 +22,7 @@ jobs:
       id: find
       uses: ./
       with:
-        string: Issue GA-222
+        from: commits
 
     - name: Find issue info
       run: echo "Issue ${{ steps.find.outputs.issue }} was found"
