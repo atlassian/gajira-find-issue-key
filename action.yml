@@ -1,5 +1,8 @@
 name: Jira Find issue key
 description: Find an issue inside event
+branding:
+  icon: 'book-open'
+  color: 'blue'
 inputs:
   event:
     description: Provide jsonpath for the GitHub event to extract issue from
