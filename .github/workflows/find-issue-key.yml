@@ -21,6 +21,8 @@ jobs:
     - name: Find Issue Key
       id: find
       uses: ./
+      with:
+        string: Issue GA-222
 
     - name: Find issue info
       run: echo "Issue ${{ steps.find.outputs.issue }} was found"
