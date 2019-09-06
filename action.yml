@@ -1,4 +1,4 @@
-name: Jira Find Issue Key
+name: Jira Find issue key
 description: Find an issue inside event
 inputs:
   event:
