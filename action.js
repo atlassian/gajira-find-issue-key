@@ -22,9 +22,11 @@ module.exports = class {
   }
 
   async execute () {
-    const template = eventTemplates[this.argv.from] || this.argv._.join(' ')
+    const template = this.argv.string || eventTemplates[this.argv.from]
     const extractString = this.preprocessString(template)
     const match = extractString.match(issueIdRegEx)
+
+    console.log(`Searching for keys in:\n${extractString}\n`)
 
     if (!match) {
       console.log(`String "${extractString}" does not contain issueKeys`)
