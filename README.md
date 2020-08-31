@@ -23,7 +23,7 @@ To find an issue key inside commit messages:
 - None
 
 ### Inputs
-- `description` - Provide jsonpath for the GitHub event to extract issue from
+- `event` - Provide jsonpath for the GitHub event to extract issue from
 - `string` - Provide a string to extract issue key from
 - `from` - Find from predefined place (should be either 'branch', or 'commits', default is 'commits')
 
