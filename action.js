@@ -23,7 +23,9 @@ module.exports = class {
 
   async execute () {
     if (this.argv.string) {
-      return this.findIssueKeyIn(this.argv.string)
+      const foundIssue = await this.findIssueKeyIn(this.argv.string)
+
+      if (foundIssue) return foundIssue
     }
 
     if (this.argv.from) {
@@ -31,8 +33,9 @@ module.exports = class {
 
       if (template) {
         const searchStr = this.preprocessString(template)
+        const foundIssue = await this.findIssueKeyIn(searchStr)
 
-        return this.findIssueKeyIn(searchStr)
+        if (foundIssue) return foundIssue
       }
     }
   }
@@ -44,6 +47,8 @@ module.exports = class {
 
     if (!match) {
       console.log(`String does not contain issueKeys`)
+
+      return
     }
 
     for (const issueKey of match) {
