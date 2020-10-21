@@ -38,6 +38,7 @@ module.exports = class {
   }
 
   async findIssueKeyIn (searchStr) {
+    console.log('searchStr:', searchStr)
     const match = searchStr.match(issueIdRegEx)
 
     if (!match) {
