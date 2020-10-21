@@ -22,14 +22,26 @@ module.exports = class {
   }
 
   async execute () {
-    const template = eventTemplates[this.argv.from] || this.argv._.join(' ')
-    const extractString = this.preprocessString(template)
-    const match = extractString.match(issueIdRegEx)
+    if (this.argv.string) {
+      return this.findIssueKeyIn(this.argv.string)
+    }
+
+    if (this.argv.from) {
+      const template = eventTemplates[this.argv.from]
+
+      if (template) {
+        const searchStr = this.preprocessString(template)
+
+        return this.findIssueKeyIn(searchStr)
+      }
+    }
+  }
+
+  async findIssueKeyIn (searchStr) {
+    const match = searchStr.match(issueIdRegEx)
 
     if (!match) {
-      console.log(`String "${extractString}" does not contain issueKeys`)
-
-      return
+      console.log(`String "${searchStr}" does not contain issueKeys`)
     }
 
     for (const issueKey of match) {
