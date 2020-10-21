@@ -4,14 +4,11 @@ branding:
   icon: 'book-open'
   color: 'blue'
 inputs:
-  event:
-    description: Provide jsonpath for the GitHub event to extract issue from
-    required: false
   string:
     description: Provide a string to extract issue key from
     required: false
   from:
-    description: Find from predefined place (should be either 'branch', or 'commits', default is 'commits')
+    description: Find from predefined place (should be either 'branch', or 'commits')
     required: false
     default: commits
 outputs:

@@ -34,8 +34,7 @@ async function exec () {
       return fs.appendFileSync(cliConfigPath, yamledResult)
     }
 
-    console.log('No issueKeys found.')
-    core.setNeutral()
+    console.log('No issue keys found.')
   } catch (error) {
     core.setFailed(error.toString())
   }
@@ -43,7 +42,6 @@ async function exec () {
 
 function parseArgs () {
   return {
-    event: core.getInput('event') || config.event,
     string: core.getInput('string') || config.string,
     from: core.getInput('from'),
   }
