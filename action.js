@@ -40,10 +40,10 @@ module.exports = class {
   async findIssueKeyIn (searchStr) {
     const match = searchStr.match(issueIdRegEx)
 
-    if (!match) {
-      console.log(`String "${searchStr}" does not contain issueKeys`)
+    console.log(`Searching in string: \n ${searchStr}`)
 
-      return
+    if (!match) {
+      console.log(`String does not contain issueKeys`)
     }
 
     for (const issueKey of match) {
