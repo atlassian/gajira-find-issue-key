@@ -23,9 +23,9 @@ module.exports = class {
 
   async execute () {
     if (this.argv.string) {
-      const foundIssue = await this.findIssueKeyIn(this.argv.string)
+      const foundIssues = await this.findIssueKeyIn(this.argv.string)
 
-      if (foundIssue) return foundIssue
+      if (foundIssues.length > 0) return foundIssues
     }
 
     if (this.argv.from) {
@@ -33,9 +33,9 @@ module.exports = class {
 
       if (template) {
         const searchStr = this.preprocessString(template)
-        const foundIssue = await this.findIssueKeyIn(searchStr)
+        const foundIssues = await this.findIssueKeyIn(searchStr)
 
-        if (foundIssue) return foundIssue
+        if (foundIssues.length > 0) return foundIssues
       }
     }
   }
@@ -51,13 +51,17 @@ module.exports = class {
       return
     }
 
+    const issues = []
     for (const issueKey of match) {
       const issue = await this.Jira.getIssue(issueKey)
 
       if (issue) {
-        return { issue: issue.key }
+        issues.push(issue)
       }
     }
+    // de-dupe
+    let uniqueItems = [...new Set(issues)]
+    return uniqueItems
   }
 
   preprocessString (str) {

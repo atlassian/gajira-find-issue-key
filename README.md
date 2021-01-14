@@ -43,13 +43,13 @@ To find an issue key inside commit messages:
 - `from` - Find from predefined place (should be either 'branch', or 'commits')
 
 ### Outputs
-- `issue` - Key of the found issue
+- `issues` - An array of found issue keys
 
 ### Reads fields from config file at $HOME/jira/config.yml
 - None
 
 ### Writes fields to config file at $HOME/jira/config.yml
-- `issue` - a key of a found issue
+- `issues` - An array of found issue keys
 
 ### Writes fields to CLI config file at $HOME/.jira.d/config.yml
-- `issue` - a key of a found issue
+- `issues` - An array of found issue keys
