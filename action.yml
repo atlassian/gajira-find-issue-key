@@ -11,9 +11,14 @@ inputs:
     description: Find from predefined place (should be either 'branch', or 'commits')
     required: false
     default: commits
+  fields:
+    description: csv of fields to return with queried issue
+    required: false
 outputs:
-  issue:
+  key:
     description: Key of the found issue
+  issue:
+    description: Found issue in JIRA
 runs:
   using: 'node12'
   main: './dist/index.js'

@@ -19,11 +19,12 @@ async function exec () {
     }).execute()
 
     if (result) {
-      console.log(`Detected issueKey: ${result.issue}`)
-      console.log(`Saving ${result.issue} to ${cliConfigPath}`)
-      console.log(`Saving ${result.issue} to ${configPath}`)
+      console.log(`Detected issueKey: ${result.key}`)
+      console.log(`Saving ${result.key} to ${cliConfigPath}`)
+      console.log(`Saving ${result.key} to ${configPath}`)
 
       // Expose created issue's key as an output
+      core.setOutput('key', result.key)
       core.setOutput('issue', result.issue)
 
       const yamledResult = YAML.stringify(result)
@@ -44,6 +45,7 @@ function parseArgs () {
   return {
     string: core.getInput('string') || config.string,
     from: core.getInput('from'),
+    fields: core.getInput('fields')
   }
 }
 

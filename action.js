@@ -22,8 +22,14 @@ module.exports = class {
   }
 
   async execute () {
+    fields = [];
+    if(this.argv.fields) {
+      fields.concat(
+        this.argv.fields.split(",").map(s => s.trim())
+      );
+    }
     if (this.argv.string) {
-      const foundIssue = await this.findIssueKeyIn(this.argv.string)
+      const foundIssue = await this.findIssueKeyIn(this.argv.string, fields)
 
       if (foundIssue) return foundIssue
     }
@@ -33,14 +39,14 @@ module.exports = class {
 
       if (template) {
         const searchStr = this.preprocessString(template)
-        const foundIssue = await this.findIssueKeyIn(searchStr)
+        const foundIssue = await this.findIssueKeyIn(searchStr, fields)
 
         if (foundIssue) return foundIssue
       }
     }
   }
 
-  async findIssueKeyIn (searchStr) {
+  async findIssueKeyIn (searchStr, fields) {
     const match = searchStr.match(issueIdRegEx)
 
     console.log(`Searching in string: \n ${searchStr}`)
@@ -52,10 +58,12 @@ module.exports = class {
     }
 
     for (const issueKey of match) {
-      const issue = await this.Jira.getIssue(issueKey)
+      const issue = await this.Jira.getIssue(issueKey, {
+        fields: fields
+      })
 
       if (issue) {
-        return { issue: issue.key }
+        return { key: issue.key, issue: issue }
       }
     }
   }
