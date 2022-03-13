@@ -22,7 +22,7 @@ module.exports = class {
   }
 
   async execute () {
-    fields = [];
+    const fields = [];
     if(this.argv.fields) {
       fields.concat(
         this.argv.fields.split(",").map(s => s.trim())
