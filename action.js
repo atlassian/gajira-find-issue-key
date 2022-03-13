@@ -28,6 +28,7 @@ module.exports = class {
         this.argv.fields.split(",").map(s => s.trim())
       );
     }
+    console.log(`fields: \n ${fields}`)
     if (this.argv.string) {
       const foundIssue = await this.findIssueKeyIn(this.argv.string, fields)
 
