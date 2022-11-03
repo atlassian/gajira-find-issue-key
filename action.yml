@@ -15,5 +15,5 @@ outputs:
   issue:
     description: Key of the found issue
 runs:
-  using: 'node12'
+  using: 'node16'
   main: './dist/index.js'
