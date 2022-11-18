@@ -33,7 +33,7 @@ jobs:
       with:
         string: ${{ github.event.ref }} will search in branch name
 
-    - name: error if missing issue
+    - name: should skip if working, or else error out
       if: ${{ steps.find.outputs.issue == '' }}
       run: echo "Issue not found" && exit 1
 
