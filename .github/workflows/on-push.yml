@@ -1,5 +1,4 @@
-on:
-  push
+on: push
 
 name: Test Find Issue Key
 
@@ -27,12 +26,16 @@ jobs:
       id: find
       uses: ./
       with:
-        string: Search is performed in this string. GA-250 will be found
+        string: Search is performed in this string. FIND-1 will be found
 
     - name: Find Issue Key
       uses: ./
       with:
         string: ${{ github.event.ref }} will search in branch name
+
+    - name: should skip if working, or else error out
+      if: ${{ steps.find.outputs.issue == '' }}
+      run: echo "Issue not found" && exit 1
 
     - name: Find issue info
       run: echo "Issue ${{ steps.find.outputs.issue }} was found"
