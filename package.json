@@ -1,7 +1,7 @@
 {
   "name": "@atlassian/gajira-find-issue-key",
-  "version": "3.0.0",
-  "description": "",
+  "version": "3.0.1",
+  "description": "Find issue keys in string",
   "main": "index.js",
   "scripts": {
 		"prepare": "husky install",
