@@ -1,3 +1,7 @@
+---------
+⚠️ This repository isn’t maintained anymore.
+---------
+
 # Jira Find Issue Key
 Extract issue key from string
 
